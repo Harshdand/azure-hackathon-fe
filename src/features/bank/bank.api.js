@@ -14,3 +14,11 @@ export const getUserPolicies = () => {
     url: `/getPolicies`,
   });
 };
+
+export const createUser = (data) => {
+  return axios({
+    method: 'POST',
+    url: `/person`,
+    data,
+  });
+};

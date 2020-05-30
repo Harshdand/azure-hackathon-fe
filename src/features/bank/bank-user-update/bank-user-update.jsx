@@ -22,7 +22,7 @@ const columnProps = {
   },
 };
 
-const BankUserSearch = () => {
+const BankUserUpdate = () => {
   const history = useHistory();
   const { path } = useRouteMatch();
   const [searchResult, setSearchResult] = useState({
@@ -81,4 +81,4 @@ const BankUserSearch = () => {
   );
 };
 
-export default BankUserSearch;
+export default BankUserUpdate;
