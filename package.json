@@ -19,7 +19,7 @@
     "yup": "^0.28.5"
   },
   "scripts": {
-    "start": "yarn build && node app.js",
+    "start": "app.js",
     "dev": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
