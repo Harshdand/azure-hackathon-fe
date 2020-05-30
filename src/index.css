@@ -8,7 +8,15 @@ body {
   background-color: #faf9f8;
 }
 
+button:focus {
+  outline: none;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.font-bold {
+  font-weight: 600;
 }

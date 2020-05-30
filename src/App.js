@@ -6,11 +6,14 @@ import {
   BrowserRouter as Router,
 } from 'react-router-dom';
 
+import { initializeIcons } from '@uifabric/icons';
 import './App.css';
 
 import Bank from './features/bank/bank';
 import Govt from './features/govt/govt';
 import User from './features/user/user';
+
+initializeIcons();
 
 function App() {
   return (
