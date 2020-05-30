@@ -4,7 +4,7 @@ import { getToken } from './utils/token';
 const setupAxios = () => {
   console.log('axios');
   const instance = axiosLib.create({
-    baseURL: 'http://localhost:5000/api/',
+    baseURL: process.env.REACT_APP_BASE_URL,
   });
 
   instance.interceptors.request.use((config) => {
