@@ -8,17 +8,25 @@ export const login = (data) => {
   });
 };
 
-export const getUserPolicies = () => {
-  return axios({
-    method: 'get',
-    url: `/getPolicies`,
-  });
-};
+// export const getUserPolicies = () => {
+//   return axios({
+//     method: 'get',
+//     url: `/getPolicies`,
+//   });
+// };
 
 export const createUser = (data) => {
   return axios({
     method: 'POST',
     url: `/person`,
+    data,
+  });
+};
+
+export const addAsset = (data) => {
+  return axios({
+    method: 'POST',
+    url: `/asset`,
     data,
   });
 };

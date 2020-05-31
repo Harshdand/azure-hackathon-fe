@@ -69,7 +69,7 @@ const BankUserSearch = () => {
                   text="NEXT"
                   style={{ width: '180px' }}
                   onClick={() => {
-                    history.push(`${path}/user/new`);
+                    history.push(`${path}/user/update/${searchResult.user.id}`);
                   }}
                 />
               </Col>

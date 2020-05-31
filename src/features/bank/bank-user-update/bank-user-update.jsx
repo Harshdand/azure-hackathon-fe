@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Stack,
   PrimaryButton,
@@ -6,9 +6,10 @@ import {
   MessageBarType,
 } from '@fluentui/react';
 import { Container, Row, Col } from 'reactstrap';
-import UserSearch from '../../../common/user-search/user-search';
 import UserCard from '../../../common/user-card/user-card';
-import { useHistory, useRouteMatch } from 'react-router-dom';
+import { useHistory, useRouteMatch, useParams } from 'react-router-dom';
+import { userSearch } from '../../../common/user-search/user-search.api';
+import BankAsset from '../bank-asset/bank-asset';
 
 const columnProps = {
   tokens: { childrenGap: 15 },
@@ -25,58 +26,47 @@ const columnProps = {
 const BankUserUpdate = () => {
   const history = useHistory();
   const { path } = useRouteMatch();
-  const [searchResult, setSearchResult] = useState({
-    success: true,
-  });
+  const [isLoading, setIsLoading] = useState(false);
+  const [assetEdit, setAssetEdit] = useState(false);
+  const [user, setUser] = useState();
+  const { id } = useParams();
 
-  const onSearch = (value) => {
-    setSearchResult(value);
+  const onLoad = async (id) => {
+    try {
+      setIsLoading(true);
+      const resp = await userSearch({ id });
+      if (resp.status === 200) {
+        setIsLoading(false);
+        setUser(resp.data.data);
+      }
+    } catch (error) {
+      console.log(error);
+      setIsLoading(false);
+    }
   };
+
+  useEffect(() => {
+    onLoad(id);
+  }, [id]);
 
   return (
     <>
       <Container>
         <Stack {...columnProps} className="hc-shadow">
-          <UserSearch onSearch={onSearch}></UserSearch>
-          {!searchResult.success && (
-            <>
-              <MessageBar
-                messageBarType={MessageBarType.warning}
-                style={{ fontSize: '16px' }}
-              >
-                Unable to find the user with provided info.
-              </MessageBar>
+          <UserCard details={user} hideAddress />
+          {user && (
+            <PrimaryButton
+              text="ADD ASSET"
+              style={{ width: '230px', marginTop: '30px' }}
+              onClick={() => {
+                setAssetEdit(true);
+              }}
+            />
+          )}
+        </Stack>
 
-              <PrimaryButton
-                text="CREATE NEW USER"
-                style={{ width: '180px', marginTop: '30px' }}
-                onClick={() => {
-                  history.push(`${path}/user/new`);
-                }}
-              />
-            </>
-          )}
-        </Stack>
+        {user && assetEdit && <BankAsset userId={id}></BankAsset>}
       </Container>
-      {searchResult?.user?.id && (
-        <Stack {...columnProps} className="hc-shadow">
-          <UserCard details={searchResult.user} />
-          {searchResult?.user?.isAlive && (
-            <Row>
-              <Col sm={8}></Col>
-              <Col sm={4} style={{ textAlign: 'right' }}>
-                <PrimaryButton
-                  text="NEXT"
-                  style={{ width: '180px' }}
-                  onClick={() => {
-                    history.push(`${path}/user/new`);
-                  }}
-                />
-              </Col>
-            </Row>
-          )}
-        </Stack>
-      )}
     </>
   );
 };

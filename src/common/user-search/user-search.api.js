@@ -1,7 +1,7 @@
 import axios from '../../axios';
 
 export const userSearch = (params) => {
-  let { pan, aadhaar } = params;
+  let { pan = '', aadhaar = '', id = '' } = params;
 
   aadhaar = aadhaar.replace(/-/g, '');
   aadhaar = aadhaar.replace(/_/g, '');
@@ -14,6 +14,10 @@ export const userSearch = (params) => {
 
   if (aadhaar) {
     payloadParams.aadhaar = aadhaar;
+  }
+
+  if (id) {
+    payloadParams.id = id;
   }
 
   return axios({
