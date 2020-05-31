@@ -20,6 +20,7 @@ const UserCard = ({ details = {} } = {}) => {
     address = {},
     isAlive,
     deathDetails = {},
+    hideAddress,
   } = details;
 
   return (
@@ -66,59 +67,61 @@ const UserCard = ({ details = {} } = {}) => {
           </Col>
         )}
       </Row>
-      <Row>
-        <Col sm={6}>
-          <Row>
-            <Col>
-              <Text className="font-bold" variant="mediumPlus">
-                Address:
-              </Text>
-            </Col>
-          </Row>
-          <Row>
-            <Col>
-              <Text className="font-bold" variant="mediumPlus">
-                Line 1:
-              </Text>
-              <Text variant="mediumPlus"> {address.line1}</Text>
-            </Col>
-            <Col>
-              <Text className="font-bold" variant="mediumPlus">
-                Line 2:
-              </Text>
-              <Text variant="mediumPlus"> {address.line2}</Text>
-            </Col>
-          </Row>
-          <Row>
-            <Col>
-              <Text className="font-bold" variant="mediumPlus">
-                City:
-              </Text>
-              <Text variant="mediumPlus"> {address.city}</Text>
-            </Col>
-            <Col>
-              <Text className="font-bold" variant="mediumPlus">
-                State:
-              </Text>
-              <Text variant="mediumPlus"> {address.state}</Text>
-            </Col>
-          </Row>
-          <Row>
-            <Col>
-              <Text className="font-bold" variant="mediumPlus">
-                Country:
-              </Text>
-              <Text variant="mediumPlus"> {address.country}</Text>
-            </Col>
-            <Col>
-              <Text className="font-bold" variant="mediumPlus">
-                ZIP:
-              </Text>
-              <Text variant="mediumPlus"> {address.zip}</Text>
-            </Col>
-          </Row>
-        </Col>
-      </Row>
+      {hideAddress && (
+        <Row>
+          <Col sm={6}>
+            <Row>
+              <Col>
+                <Text className="font-bold" variant="mediumPlus">
+                  Address:
+                </Text>
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                <Text className="font-bold" variant="mediumPlus">
+                  Line 1:
+                </Text>
+                <Text variant="mediumPlus"> {address.line1}</Text>
+              </Col>
+              <Col>
+                <Text className="font-bold" variant="mediumPlus">
+                  Line 2:
+                </Text>
+                <Text variant="mediumPlus"> {address.line2}</Text>
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                <Text className="font-bold" variant="mediumPlus">
+                  City:
+                </Text>
+                <Text variant="mediumPlus"> {address.city}</Text>
+              </Col>
+              <Col>
+                <Text className="font-bold" variant="mediumPlus">
+                  State:
+                </Text>
+                <Text variant="mediumPlus"> {address.state}</Text>
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                <Text className="font-bold" variant="mediumPlus">
+                  Country:
+                </Text>
+                <Text variant="mediumPlus"> {address.country}</Text>
+              </Col>
+              <Col>
+                <Text className="font-bold" variant="mediumPlus">
+                  ZIP:
+                </Text>
+                <Text variant="mediumPlus"> {address.zip}</Text>
+              </Col>
+            </Row>
+          </Col>
+        </Row>
+      )}
     </>
   );
 };
